@@ -1,11 +1,8 @@
 import React from "react";
+import style from "../styles/modules/title.module.scss";
 
 const PageTitle = ({ children }) => {
-  return (
-    <div>
-      <h1>{children}</h1>
-    </div>
-  );
+  return <p className={style.title}>{children}</p>;
 };
 
 export default PageTitle;

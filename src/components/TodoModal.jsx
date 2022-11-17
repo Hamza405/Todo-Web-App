@@ -5,6 +5,7 @@ import { addTodo } from "../store/slices/todoSlice";
 import { v4 as uuid } from "uuid";
 import style from "../styles/modules/modal.module.scss";
 import Button from "./Button";
+import toast from "react-hot-toast";
 
 const TodoModal = ({ handleCloseModal }) => {
   const [title, setTitle] = useState("");
@@ -19,9 +20,13 @@ const TodoModal = ({ handleCloseModal }) => {
           id: uuid(),
           title,
           status,
-          time: new Date().toLocaleDateString(),
+          time: new Date().toLocaleString(),
         })
       );
+      toast.success("Task Added Successfully");
+      handleCloseModal();
+    } else {
+      toast.error("Title shouldn't be empty");
     }
   };
   return (

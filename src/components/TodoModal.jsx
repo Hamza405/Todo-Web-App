@@ -3,11 +3,11 @@ import { MdOutlineClose } from "react-icons/md";
 import style from "../styles/modules/modal.module.scss";
 import Button from "./Button";
 
-const TodoModal = () => {
+const TodoModal = ({ handleCloseModal }) => {
   return (
     <div className={style.wrapper}>
       <div className={style.container}>
-        <div className={style.closeButton}>
+        <div onClick={handleCloseModal} className={style.closeButton}>
           <MdOutlineClose />
         </div>
         <form className={style.form}>
@@ -27,7 +27,11 @@ const TodoModal = () => {
             <Button type="submit" variant="primary">
               Add task
             </Button>
-            <Button type="button" variant="secondary">
+            <Button
+              onClick={handleCloseModal}
+              type="button"
+              variant="secondary"
+            >
               Cancel
             </Button>
           </div>

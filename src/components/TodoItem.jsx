@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { format } from "date-fns";
 import { MdDelete, MdEdit } from "react-icons/md";
 import { getStyleClasses } from "../utils/getStyleClasses";
@@ -6,11 +6,21 @@ import style from "../styles/modules/todoItem.module.scss";
 import { useDispatch } from "react-redux";
 import { deleteTodo } from "../store/slices/todoSlice";
 import TodoModal from "./TodoModal";
+import CheckButton from "./CheckButton";
 
 const TodoItem = ({ todo }) => {
   const [showUpdateModal, setShowUpdateModal] = useState(false);
+  const [checked, setChecked] = useState(false);
   const handleCloseModal = () => setShowUpdateModal(false);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (todo.status === "complete") {
+      setChecked(true);
+    } else {
+      setChecked(false);
+    }
+  }, [todo.status]);
 
   const handleUpdate = (e) => setShowUpdateModal(true);
   const handleDelete = () => {
@@ -20,6 +30,7 @@ const TodoItem = ({ todo }) => {
     <>
       <div className={style.item}>
         <div className={style.todoDetails}>
+          <CheckButton checked={checked} />
           <div className={style.texts}>
             <p
               className={getStyleClasses([

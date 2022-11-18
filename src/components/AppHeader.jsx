@@ -15,7 +15,7 @@ const AppHeader = () => {
       <Button onClick={handleOpenModal}>Add Task</Button>
       <SelectButton>
         <option value="all">All</option>
-        <option value="inCompleted">In Completed</option>
+        <option value="incompleted">In Completed</option>
         <option value="completed">Completed</option>
       </SelectButton>
       {modalOpen && <TodoModal handleCloseModal={handleCloseModal} />}

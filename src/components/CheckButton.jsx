@@ -27,7 +27,7 @@ function CheckButton({ checked, handleCheck }) {
       animate={checked ? "checked" : "unchecked"}
       className={styles.svgBox}
       variants={boxVariants}
-      onClick={() => {}}
+      onClick={handleCheck}
     >
       <motion.svg
         className={styles.svg}

@@ -4,7 +4,7 @@ import { MdDelete, MdEdit } from "react-icons/md";
 import { getStyleClasses } from "../utils/getStyleClasses";
 import style from "../styles/modules/todoItem.module.scss";
 import { useDispatch } from "react-redux";
-import { deleteTodo } from "../store/slices/todoSlice";
+import { deleteTodo, updateTodo } from "../store/slices/todoSlice";
 import TodoModal from "./TodoModal";
 import CheckButton from "./CheckButton";
 
@@ -26,11 +26,20 @@ const TodoItem = ({ todo }) => {
   const handleDelete = () => {
     dispatch(deleteTodo(todo.id));
   };
+  const handleCheck = () => {
+    setChecked(!checked);
+    dispatch(
+      updateTodo({
+        ...todo,
+        status: checked ? "incomplete" : "complete",
+      })
+    );
+  };
   return (
     <>
       <div className={style.item}>
         <div className={style.todoDetails}>
-          <CheckButton checked={checked} />
+          <CheckButton checked={checked} handleCheck={handleCheck} />
           <div className={style.texts}>
             <p
               className={getStyleClasses([

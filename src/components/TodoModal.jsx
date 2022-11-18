@@ -30,7 +30,7 @@ const dropIn = {
 
 const TodoModal = ({ type, todo, handleCloseModal }) => {
   const [title, setTitle] = useState("");
-  const [status, setStatus] = useState("inComplete");
+  const [status, setStatus] = useState("incomplete");
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -99,7 +99,7 @@ const TodoModal = ({ type, todo, handleCloseModal }) => {
               id="status"
               name="status"
             >
-              <option value="inComplete">In Complete</option>
+              <option value="incomplete">In Complete</option>
               <option value="complete">Complete</option>
             </select>
           </label>

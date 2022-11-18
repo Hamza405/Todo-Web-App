@@ -19,8 +19,8 @@ const AppHeader = () => {
       <Button onClick={handleOpenModal}>Add Task</Button>
       <SelectButton id="status" value={filterStatus} onChange={handleFilter}>
         <option value="all">All</option>
-        <option value="incompleted">In Completed</option>
-        <option value="completed">Completed</option>
+        <option value="incomplete">In Completed</option>
+        <option value="complete">Completed</option>
       </SelectButton>
       {modalOpen && <TodoModal handleCloseModal={handleCloseModal} />}
     </div>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { format } from "date-fns";
+import { motion } from "framer-motion";
 import { MdDelete, MdEdit } from "react-icons/md";
 import { getStyleClasses } from "../utils/getStyleClasses";
 import style from "../styles/modules/todoItem.module.scss";
@@ -7,6 +8,14 @@ import { useDispatch } from "react-redux";
 import { deleteTodo, updateTodo } from "../store/slices/todoSlice";
 import TodoModal from "./TodoModal";
 import CheckButton from "./CheckButton";
+
+const child = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+  },
+};
 
 const TodoItem = ({ todo }) => {
   const [showUpdateModal, setShowUpdateModal] = useState(false);
@@ -37,7 +46,7 @@ const TodoItem = ({ todo }) => {
   };
   return (
     <>
-      <div className={style.item}>
+      <motion.div variants={child} className={style.item}>
         <div className={style.todoDetails}>
           <CheckButton checked={checked} handleCheck={handleCheck} />
           <div className={style.texts}>
@@ -74,7 +83,7 @@ const TodoItem = ({ todo }) => {
             <MdEdit />
           </div>
         </div>
-      </div>
+      </motion.div>
       {showUpdateModal && (
         <TodoModal
           type="update"

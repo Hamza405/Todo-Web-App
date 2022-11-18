@@ -6,6 +6,7 @@ import { v4 as uuid } from "uuid";
 import style from "../styles/modules/modal.module.scss";
 import Button from "./Button";
 import toast from "react-hot-toast";
+import { AnimatePresence, motion } from "framer-motion";
 
 const dropIn = {
   hidden: {
@@ -73,51 +74,71 @@ const TodoModal = ({ type, todo, handleCloseModal }) => {
     handleCloseModal();
   };
   return (
-    <div className={style.wrapper}>
-      <div className={style.container}>
-        <div onClick={handleCloseModal} className={style.closeButton}>
-          <MdOutlineClose />
-        </div>
-        <form className={style.form} onSubmit={handleSubmit}>
-          <h1 className={style.formTitle}>
-            {type === "add" ? "Add" : "Update"} TODO
-          </h1>
-          <label htmlFor="title">
-            Title
-            <input
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              type="text"
-              id="title"
-            />
-          </label>
-          <label htmlFor="status">
-            Status
-            <select
-              value={status}
-              onChange={(e) => setStatus(e.target.value)}
-              id="status"
-              name="status"
-            >
-              <option value="incomplete">In Complete</option>
-              <option value="complete">Complete</option>
-            </select>
-          </label>
-          <div className={style.buttonContainer}>
-            <Button type="submit" variant="primary">
-              {type === "add" ? "Add Task" : "Update Task"}
-            </Button>
-            <Button
-              onClick={handleCloseModal}
-              type="button"
-              variant="secondary"
-            >
-              Cancel
-            </Button>
-          </div>
-        </form>
-      </div>
-    </div>
+    <AnimatePresence>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className={style.wrapper}
+      >
+        <motion.div
+          variants={dropIn}
+          initial="hidden"
+          animate="visible"
+          exit="exit"
+          className={style.container}
+        >
+          <motion.div
+            onClick={handleCloseModal}
+            className={style.closeButton}
+            // animation
+            initial={{ top: 40, opacity: 0 }}
+            animate={{ top: -10, opacity: 1 }}
+            exit={{ top: 40, opacity: 0 }}
+          >
+            <MdOutlineClose />
+          </motion.div>
+          <form className={style.form} onSubmit={handleSubmit}>
+            <h1 className={style.formTitle}>
+              {type === "add" ? "Add" : "Update"} TODO
+            </h1>
+            <label htmlFor="title">
+              Title
+              <input
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                type="text"
+                id="title"
+              />
+            </label>
+            <label htmlFor="status">
+              Status
+              <select
+                value={status}
+                onChange={(e) => setStatus(e.target.value)}
+                id="status"
+                name="status"
+              >
+                <option value="incomplete">In Complete</option>
+                <option value="complete">Complete</option>
+              </select>
+            </label>
+            <div className={style.buttonContainer}>
+              <Button type="submit" variant="primary">
+                {type === "add" ? "Add Task" : "Update Task"}
+              </Button>
+              <Button
+                onClick={handleCloseModal}
+                type="button"
+                variant="secondary"
+              >
+                Cancel
+              </Button>
+            </div>
+          </form>
+        </motion.div>
+      </motion.div>
+    </AnimatePresence>
   );
 };
 

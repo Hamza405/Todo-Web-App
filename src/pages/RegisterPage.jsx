@@ -2,12 +2,16 @@ import React from "react";
 import Button from "../components/Button";
 import style from "../styles/modules/register.module.scss";
 
-const LoginPage = () => {
+const RegisterPage = () => {
   return (
     <div className={style.page__wrapper}>
       <div className={style.card}>
         <form className={style.form}>
-          <h2 className={style.formTitle}>Login</h2>
+          <h2 className={style.formTitle}>Register</h2>
+          <label htmlFor="username">
+            User Name
+            <input id="username" type="text" />
+          </label>
           <label htmlFor="email">
             Email
             <input type="email" id="email" />
@@ -22,13 +26,13 @@ const LoginPage = () => {
             type="submit"
             variant="primary"
           >
-            Login
+            Sign up
           </Button>
-          <p>You don't have an account ? Register</p>
+          <p> Do you have an account ? Login</p>
         </form>
       </div>
     </div>
   );
 };
 
-export default LoginPage;
+export default RegisterPage;

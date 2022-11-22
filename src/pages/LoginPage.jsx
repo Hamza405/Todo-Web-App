@@ -1,4 +1,6 @@
 import React, { useRef, useState } from "react";
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import Button from "../components/Button";
 import style from "../styles/modules/register.module.scss";
 
@@ -28,7 +30,11 @@ const LoginPage = () => {
   };
   return (
     <div className={style.page__wrapper}>
-      <div className={style.card}>
+      <motion.div
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        className={style.card}
+      >
         <form className={style.form} onSubmit={submit}>
           <h2 className={style.formTitle}>Login</h2>
           <label htmlFor="email">
@@ -49,9 +55,13 @@ const LoginPage = () => {
           >
             Login
           </Button>
-          <p className={style.navigate}>You don't have an account ? Register</p>
+          <Link to="/register" className="link">
+            <p className={style.navigate}>
+              You don't have an account ? Register
+            </p>
+          </Link>
         </form>
-      </div>
+      </motion.div>
     </div>
   );
 };

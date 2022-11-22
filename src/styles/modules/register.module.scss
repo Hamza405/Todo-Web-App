@@ -19,31 +19,32 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+
 	label {
 		font-size: 1.6rem;
 		color: var(--black-1);
-		input,
-		select {
-			margin-top: 0.5rem;
-			margin-bottom: 2.5rem;
+		margin: 10px 4px;
+		input {
+			border:none;
+			border-bottom: 1px solid var(--gray-2);margin-top: 0.5rem;
 			width: 100%;
 			padding: 1rem;
-			border: none;
 			background-color: var(--white);
 			font-size: 1.6rem;
-		}
-		input {
-			border-bottom: 1px solid var(--gray-2);
 			outline: none;
 		}
-
 	}
 	
 	p {
-		color: var(--primaryPurple);
 		font-size: 12px;
-		margin: 10px;
+		margin: 5px ;
+		color: red;
 		cursor: pointer;
+	}
+
+	.navigate{
+		margin: 16px 0px;
+		color: var(--primaryPurple);
 	}
 }
 

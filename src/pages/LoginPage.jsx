@@ -1,16 +1,20 @@
 import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { Toaster } from "react-hot-toast";
+import { login } from "../api/auth-api";
 import Button from "../components/Button";
 import style from "../styles/modules/register.module.scss";
+import toast from "react-hot-toast";
 
 const LoginPage = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
   const [emailError, setEmailError] = useState(null);
   const [passwordError, setPasswordError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault();
     const inputData = {
       email: emailRef.current.value,
@@ -22,11 +26,21 @@ const LoginPage = () => {
       return;
     }
 
-    if (inputData.password.trim() === "") {
-      setPasswordError({ error: "Enter your password!" });
+    if (inputData.password.trim() === "" || inputData.password.length < 7) {
+      setPasswordError({ error: "Password should be at lest 7 charter" });
       return;
     }
-    console.log(inputData);
+
+    try {
+      setLoading(true);
+      const res = await login(inputData);
+      setLoading(false);
+      console.log(res);
+    } catch (e) {
+      console.log(e);
+      toast.error(e.message);
+      setLoading(false);
+    }
   };
   return (
     <div className={style.page__wrapper}>
@@ -47,14 +61,18 @@ const LoginPage = () => {
             <input ref={passwordRef} id="password" type="password" />
             {passwordError && <p>Enter your password</p>}
           </label>
-          <Button
-            style={{ padding: "0.8rem 5rem" }}
-            isAuthPage={true}
-            type="submit"
-            variant="primary"
-          >
-            Login
-          </Button>
+          {loading ? (
+            "Loading"
+          ) : (
+            <Button
+              style={{ padding: "0.8rem 5rem" }}
+              isAuthPage={true}
+              type="submit"
+              variant="primary"
+            >
+              Login
+            </Button>
+          )}
           <Link to="/register" className="link">
             <p className={style.navigate}>
               You don't have an account ? Register
@@ -62,6 +80,7 @@ const LoginPage = () => {
           </Link>
         </form>
       </motion.div>
+      <Toaster position="bottom-center" />
     </div>
   );
 };

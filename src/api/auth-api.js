@@ -24,7 +24,7 @@ export async function login(inputData) {
   return data;
 }
 
-export async function signup(inputData) {
+export async function register(inputData) {
   const res = await fetch(
     "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBKUzXswqnOZNILZCXb5Jm6sp4JW7waABg",
     {

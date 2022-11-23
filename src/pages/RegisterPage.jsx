@@ -1,13 +1,17 @@
 import React, { useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Toaster } from "react-hot-toast";
 import toast from "react-hot-toast";
-import { register } from "../api/auth-api";
+import { register, updateProfile } from "../api/auth-api";
 import Button from "../components/Button";
 import style from "../styles/modules/register.module.scss";
+import { useDispatch } from "react-redux";
+import { handleLogin } from "../store/slices/authSlice";
 
 const RegisterPage = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const emailRef = useRef();
   const passwordRef = useRef();
   const usernameRef = useRef();
@@ -42,8 +46,20 @@ const RegisterPage = () => {
     try {
       setLoading(true);
       const res = await register(inputData);
+      const secondRes = await updateProfile({
+        displayName: inputData.displayName,
+        token: res.idToken,
+      });
+      dispatch(
+        handleLogin({
+          displayName: secondRes.displayName,
+          email: res.email,
+          token: res.idToken,
+          userId: res.localId,
+        })
+      );
       setLoading(false);
-      console.log(res);
+      navigate("/");
     } catch (e) {
       console.log(e);
       toast.error(e.message);

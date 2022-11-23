@@ -39,7 +39,7 @@ const RegisterPage = () => {
   return (
     <div className={style.page__wrapper}>
       <motion.div
-        initial={{ scale: 0 }}
+        initial={{ scale: 0.7 }}
         animate={{ scale: 1 }}
         className={style.card}
       >

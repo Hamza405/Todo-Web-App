@@ -78,7 +78,6 @@ const LoginPage = () => {
           ) : (
             <Button
               style={{ padding: "0.8rem 5rem" }}
-              isAuthPage={true}
               type="submit"
               variant="primary"
             >

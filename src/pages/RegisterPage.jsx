@@ -117,7 +117,10 @@ const RegisterPage = () => {
           </Link>
         </form>
       </motion.div>
-      <Toaster position="bottom-center" />
+      <Toaster
+        toastOptions={{ className: "toaster" }}
+        position="bottom-center"
+      />
     </div>
   );
 };

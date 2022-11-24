@@ -20,7 +20,10 @@ const TodoPage = () => {
           <TodoList />
         </div>
       </div>
-      <Toaster position="bottom-right" />
+      <Toaster
+        toastOptions={{ className: "toaster" }}
+        position="bottom-right"
+      />
     </>
   );
 };

@@ -20,6 +20,8 @@ const LoginPage = () => {
 
   const submit = async (e) => {
     e.preventDefault();
+    setEmailError(null);
+    setPasswordError(null);
     const inputData = {
       email: emailRef.current.value,
       password: passwordRef.current.value,
@@ -65,13 +67,23 @@ const LoginPage = () => {
           <h2 className={style.formTitle}>Login</h2>
           <label htmlFor="email">
             Email
-            <input ref={emailRef} type="email" id="email" />
+            <input
+              className={emailError && style.error}
+              ref={emailRef}
+              type="email"
+              id="email"
+            />
             {emailError && <p>Enter your Email</p>}
           </label>
           <label style={{ marginBottom: "25px" }} htmlFor="password">
             Password
-            <input ref={passwordRef} id="password" type="password" />
-            {passwordError && <p>Enter your password</p>}
+            <input
+              className={passwordError && style.error}
+              ref={passwordRef}
+              id="password"
+              type="password"
+            />
+            {passwordError && <p>{passwordError.error}</p>}
           </label>
           {loading ? (
             "Loading"

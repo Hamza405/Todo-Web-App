@@ -77,22 +77,36 @@ const RegisterPage = () => {
           <h2 className={style.formTitle}>Register</h2>
           <label htmlFor="username">
             User Name
-            <input ref={usernameRef} id="username" type="text" />
+            <input
+              className={usernameError && style.error}
+              ref={usernameRef}
+              id="username"
+              type="text"
+            />
             {usernameError && <p>Enter your userName</p>}
           </label>
           <label htmlFor="email">
             Email
-            <input ref={emailRef} type="email" id="email" />
+            <input
+              className={emailError && style.error}
+              ref={emailRef}
+              type="email"
+              id="email"
+            />
             {emailError && <p>Enter your Email</p>}
           </label>
           <label style={{ marginBottom: "25px" }} htmlFor="password">
             Password
-            <input ref={passwordRef} id="password" type="password" />
+            <input
+              className={passwordError && style.error}
+              ref={passwordRef}
+              id="password"
+              type="password"
+            />
             {passwordError && <p>{passwordError.error}</p>}
           </label>
           <Button
             style={{ padding: "0.8rem 5rem" }}
-            isAuthPage={true}
             type="submit"
             variant="primary"
           >

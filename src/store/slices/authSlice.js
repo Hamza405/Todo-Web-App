@@ -1,10 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-
-const key = "user";
+import { authStorageKey } from "../../utils/constance";
 
 const initValue = {
-  user: JSON.parse(localStorage.getItem(key)) || null,
-  isAuth: !!JSON.parse(localStorage.getItem(key)),
+  user: JSON.parse(localStorage.getItem(authStorageKey)) || null,
+  isAuth: !!JSON.parse(localStorage.getItem(authStorageKey)),
 };
 
 // const calRemainingTime = (expirationTime) => {
@@ -20,12 +19,12 @@ const authSlice = createSlice({
   reducers: {
     handleLogin: (state, action) => {
       state.user = action.payload;
-      localStorage.setItem(key, JSON.stringify(action.payload));
+      localStorage.setItem(authStorageKey, JSON.stringify(action.payload));
       state.isAuth = true;
     },
     logout: (state, action) => {
       state.user = null;
-      localStorage.removeItem(key);
+      localStorage.removeItem(authStorageKey);
       state.isAuth = false;
     },
   },

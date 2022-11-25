@@ -1,4 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
+import {
+  addTodoAction,
+  updateTodoAction,
+  deleteTodoAction,
+  updateFilterStatusAction,
+} from "../actions/todoActions";
 
 const getInitTodo = () => {
   const localTodoList = window.localStorage.getItem("todoList");
@@ -18,59 +24,17 @@ const todoSlice = createSlice({
   name: "todo",
   initialState: initValue,
   reducers: {
-    addTodo: (state, action) => {
-      state.todoList.push(action.payload);
-      const todoList = window.localStorage.getItem("todoList");
-      if (todoList) {
-        const todoListArr = JSON.parse(todoList);
-        todoListArr.push({
-          ...action.payload,
-        });
-        window.localStorage.setItem("todoList", JSON.stringify(todoListArr));
-      } else {
-        window.localStorage.setItem(
-          "todoList",
-          JSON.stringify([
-            {
-              ...action.payload,
-            },
-          ])
-        );
-      }
-    },
-    deleteTodo: (state, action) => {
-      const todoList = window.localStorage.getItem("todoList");
-      if (todoList) {
-        const todoListArr = JSON.parse(todoList);
-        todoListArr.forEach((todo, index) => {
-          if (todo.id === action.payload) {
-            todoListArr.splice(index, 1);
-          }
-        });
-        window.localStorage.setItem("todoList", JSON.stringify(todoListArr));
-        state.todoList = todoListArr;
-      }
-    },
-    updateTodo: (state, action) => {
-      const todoList = window.localStorage.getItem("todoList");
-      if (todoList) {
-        const todoListArr = JSON.parse(todoList);
-        todoListArr.forEach((todo) => {
-          if (todo.id === action.payload.id) {
-            todo.status = action.payload.status;
-            todo.title = action.payload.title;
-          }
-        });
-        window.localStorage.setItem("todoList", JSON.stringify(todoListArr));
-        state.todoList = [...todoListArr];
-      }
-    },
-    updateFilterStatus: (state, action) => {
-      state.filterStatus = action.payload;
-    },
+    addTodoAction,
+    deleteTodoAction,
+    updateTodoAction,
+    updateFilterStatusAction,
   },
 });
 
-export const { addTodo, deleteTodo, updateTodo, updateFilterStatus } =
-  todoSlice.actions;
+export const {
+  addTodoAction: addTodo,
+  deleteTodoAction: deleteTodo,
+  updateTodoAction: updateTodo,
+  updateFilterStatusAction: updateFilterStatus,
+} = todoSlice.actions;
 export default todoSlice.reducer;

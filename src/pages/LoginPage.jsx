@@ -40,6 +40,7 @@ const LoginPage = () => {
     try {
       setLoading(true);
       const res = await login(inputData);
+      console.log(res);
       dispatch(
         handleLogin({
           displayName: res.displayName,

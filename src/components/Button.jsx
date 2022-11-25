@@ -7,13 +7,15 @@ const buttonTypes = {
   secondary: "secondary",
 };
 
-const Button = ({ children, variant, type, ...rest }) => {
+const Button = ({ children, variant, pending, type, ...rest }) => {
   return (
     <button
       className={getStyleClasses([
         style.button,
         style[`button--${buttonTypes[variant]}`],
+        style[`button--${pending && "disable"}`],
       ])}
+      disabled={pending}
       type={type === "submit" ? "submit" : "button"}
       {...rest}
     >

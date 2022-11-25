@@ -109,6 +109,7 @@ const RegisterPage = () => {
             style={{ padding: "0.8rem 5rem" }}
             type="submit"
             variant="primary"
+            pending={loading}
           >
             Sign up
           </Button>

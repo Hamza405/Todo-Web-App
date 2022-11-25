@@ -86,17 +86,14 @@ const LoginPage = () => {
             />
             {passwordError && <p>{passwordError.error}</p>}
           </label>
-          {loading ? (
-            "Loading"
-          ) : (
-            <Button
-              style={{ padding: "0.8rem 5rem" }}
-              type="submit"
-              variant="primary"
-            >
-              Login
-            </Button>
-          )}
+          <Button
+            style={{ padding: "0.8rem 5rem" }}
+            type="submit"
+            variant="primary"
+            pending={loading}
+          >
+            Login
+          </Button>
           <Link to="/register" className="link">
             <p className={style.navigate}>
               You don't have an account ? Register

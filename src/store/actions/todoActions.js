@@ -1,3 +1,5 @@
+import { addTodoRequest } from "../../api/todo-api";
+
 export const addTodoAction = (state, action) => {
   state.todoList.push(action.payload);
   const todoList = window.localStorage.getItem("todoList");
@@ -47,4 +49,19 @@ export const updateTodoAction = (state, action) => {
 };
 export const updateFilterStatusAction = (state, action) => {
   state.filterStatus = action.payload;
+};
+
+export const addTodo = (userId, todo) => {
+  return async (dispatch) => {
+    try {
+      const res = await addTodoRequest(userId, todo);
+      dispatch(addTodoAction(todo));
+    } catch (e) {
+      console.log(e);
+    }
+  };
+};
+
+export const getTodo = (userId) => {
+  return async (dispatch) => {};
 };

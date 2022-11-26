@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { MdOutlineClose } from "react-icons/md";
-import { useDispatch } from "react-redux";
-import { addTodo, updateTodo } from "../store/slices/todoSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { updateTodo } from "../store/slices/todoSlice";
+import { addTodo } from "../store/actions/todoActions";
 import { v4 as uuid } from "uuid";
 import style from "../styles/modules/modal.module.scss";
 import Button from "./Button";
@@ -30,6 +31,7 @@ const dropIn = {
 };
 
 const TodoModal = ({ type, todo, handleCloseModal }) => {
+  const userId = useSelector((state) => state.auth.user.userId);
   const [title, setTitle] = useState("");
   const [status, setStatus] = useState("incomplete");
   const dispatch = useDispatch();
@@ -52,7 +54,7 @@ const TodoModal = ({ type, todo, handleCloseModal }) => {
     }
     if (title && status && type !== "update") {
       dispatch(
-        addTodo({
+        addTodo(userId, {
           id: uuid(),
           title,
           status,

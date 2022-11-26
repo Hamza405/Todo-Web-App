@@ -5,6 +5,7 @@ export const handleLoginAction = (state, action) => {
   localStorage.setItem(authStorageKey, JSON.stringify(action.payload));
   state.isAuth = true;
 };
+
 export const logoutAction = (state, action) => {
   state.user = null;
   localStorage.removeItem(authStorageKey);

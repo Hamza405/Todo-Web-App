@@ -40,7 +40,7 @@ const todoSlice = createSlice({
 
 export const {
   addTodoAction: addTodoProcess,
-  deleteTodoAction: deleteTodo,
+  deleteTodoAction: deleteTodoProcess,
   updateTodoAction: updateTodoProcess,
   updateFilterStatusAction: updateFilterStatus,
   replaceTodoListAction: replaceTodoList,
@@ -78,4 +78,8 @@ export const updateTodo = (userId, todo) => {
       console.log(e);
     }
   };
+};
+
+export const deleteTodo = async (userId, todoId) => {
+  return async (dispatch) => {};
 };

@@ -79,3 +79,24 @@ export const updateTodoRequest = async (userId, todo) => {
 
   return data;
 };
+
+export const deleteTodoRequest = async (userId, todoId) => {
+  const res = await fetch(
+    `https://tishreen-62882-default-rtdb.firebaseio.com/todos/${userId}/${todoId}.json`,
+    {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+
+  const data = await res.json();
+
+  if (!res.ok) {
+    console.log(data);
+    throw new Error(data.error.message || "Could not login!.");
+  }
+
+  return data;
+};

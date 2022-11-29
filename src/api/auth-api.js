@@ -1,4 +1,4 @@
-export async function login(inputData) {
+export async function loginRequest(inputData) {
   const res = await fetch(
     "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBKUzXswqnOZNILZCXb5Jm6sp4JW7waABg",
     {
@@ -24,7 +24,7 @@ export async function login(inputData) {
   return data;
 }
 
-export async function register(inputData) {
+export async function registerRequest(inputData) {
   const res = await fetch(
     "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBKUzXswqnOZNILZCXb5Jm6sp4JW7waABg",
     {

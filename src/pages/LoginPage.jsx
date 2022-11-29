@@ -2,12 +2,11 @@ import React, { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Toaster } from "react-hot-toast";
-import { login } from "../api/auth-api";
+import { login } from "../store/actions/authActions";
 import Button from "../components/Button";
 import style from "../styles/modules/register.module.scss";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
-import { handleLogin } from "../store/slices/authSlice";
 
 const LoginPage = () => {
   const dispatch = useDispatch();
@@ -39,16 +38,7 @@ const LoginPage = () => {
 
     try {
       setLoading(true);
-      const res = await login(inputData);
-      console.log(res);
-      dispatch(
-        handleLogin({
-          displayName: res.displayName,
-          email: res.email,
-          token: res.idToken,
-          userId: res.localId,
-        })
-      );
+      dispatch(login(inputData));
       setLoading(false);
       navigate("/");
     } catch (e) {

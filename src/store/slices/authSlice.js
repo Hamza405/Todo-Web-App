@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { handleLoginAction, logoutAction } from "../actions/authActions";
 import { authStorageKey } from "../../utils/constants";
 
 const initValue = {
@@ -18,11 +17,19 @@ const authSlice = createSlice({
   name: "auth",
   initialState: initValue,
   reducers: {
-    handleLoginAction,
-    logoutAction,
+    handleLogin: (state, action) => {
+      state.user = action.payload;
+      localStorage.setItem(authStorageKey, JSON.stringify(action.payload));
+      state.isAuth = true;
+    },
+
+    logout: (state, action) => {
+      state.user = null;
+      localStorage.removeItem(authStorageKey);
+      state.isAuth = false;
+    },
   },
 });
 
-export const { handleLoginAction: handleLogin, logoutAction: logout } =
-  authSlice.actions;
+export const { handleLogin, logout } = authSlice.actions;
 export default authSlice.reducer;

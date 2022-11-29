@@ -45,8 +45,8 @@ const TodoList = () => {
       className={style.content__wrapper}
     >
       <AnimatePresence>
-        {todoList && todoList.length > 0 ? (
-          todoList.map((i) => <TodoItem key={i.id} todo={i} />)
+        {filteredTodoList && filteredTodoList.length > 0 ? (
+          filteredTodoList.map((i) => <TodoItem key={i.id} todo={i} />)
         ) : (
           <motion.p variants={child} className={style.emptyText}>
             No Tasks Found

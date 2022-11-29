@@ -81,11 +81,10 @@ export const updateTodo = (userId, todo) => {
   };
 };
 
-export const deleteTodo = async (userId, todoId) => {
+export const deleteTodo = (userId, todoId) => {
   return async (dispatch) => {
-    console.log("ssss");
     try {
-      const res = await deleteTodoRequest(userId, todoId);
+      await deleteTodoRequest(userId, todoId);
       dispatch(deleteTodoProcess(todoId));
     } catch (e) {
       console.log(e);

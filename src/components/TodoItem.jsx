@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { format } from "date-fns";
 import { motion } from "framer-motion";
 import { MdDelete, MdEdit } from "react-icons/md";
@@ -18,6 +19,7 @@ const child = {
 };
 
 const TodoItem = ({ todo }) => {
+  const userId = useSelector((state) => state.auth.user.userId);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
   const [checked, setChecked] = useState(false);
   const handleCloseModal = () => setShowUpdateModal(false);
@@ -38,7 +40,7 @@ const TodoItem = ({ todo }) => {
   const handleCheck = () => {
     setChecked(!checked);
     dispatch(
-      updateTodo({
+      updateTodo(userId, {
         ...todo,
         status: checked ? "incomplete" : "complete",
       })

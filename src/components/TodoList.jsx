@@ -35,6 +35,7 @@ const TodoList = () => {
     }
     return item.status === filterStatus;
   });
+  console.log(todoList);
 
   return (
     <motion.div
@@ -44,8 +45,8 @@ const TodoList = () => {
       className={style.content__wrapper}
     >
       <AnimatePresence>
-        {filteredTodoList && filteredTodoList.length > 0 ? (
-          filteredTodoList.map((i) => <TodoItem key={i.id} todo={i} />)
+        {todoList && todoList.length > 0 ? (
+          todoList.map((i) => <TodoItem key={i.id} todo={i} />)
         ) : (
           <motion.p variants={child} className={style.emptyText}>
             No Tasks Found

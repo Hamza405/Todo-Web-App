@@ -40,9 +40,34 @@ export async function addTodoRequest(userId, todo) {
   return secondData;
 }
 
-export const getTodoRequest = async (userId) => {
+export async function getTodoRequest(userId) {
   const res = await fetch(
     `https://tishreen-62882-default-rtdb.firebaseio.com/todos/${userId}.json`
+  );
+
+  const data = await res.json();
+
+  if (!res.ok) {
+    console.log(data);
+    throw new Error(data.error.message || "Could not login!.");
+  }
+
+  return Object.values(data);
+}
+
+export const updateTodoRequest = async (userId, todo) => {
+  const res = await fetch(
+    `https://tishreen-62882-default-rtdb.firebaseio.com/todos/${userId}/${todo.id}.json`,
+    {
+      method: "PATCH",
+      body: JSON.stringify({
+        status: todo.status,
+        title: todo.title,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
   );
 
   const data = await res.json();

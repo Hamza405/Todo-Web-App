@@ -35,7 +35,8 @@ const TodoItem = ({ todo }) => {
 
   const handleUpdate = (e) => setShowUpdateModal(true);
   const handleDelete = () => {
-    dispatch(deleteTodo(todo.id));
+    console.log("delete");
+    dispatch(deleteTodo(userId, todo.id));
   };
   const handleCheck = () => {
     setChecked(!checked);

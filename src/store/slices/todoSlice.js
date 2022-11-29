@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
   addTodoRequest,
+  deleteTodoRequest,
   getTodoRequest,
   updateTodoRequest,
 } from "../../api/todo-api";
@@ -62,7 +63,7 @@ export const addTodo = (userId, todo) => {
   return async (dispatch) => {
     try {
       const res = await addTodoRequest(userId, todo);
-      dispatch(addTodoProcess(todo));
+      dispatch(addTodoProcess(res));
     } catch (e) {
       console.log(e);
     }
@@ -72,8 +73,8 @@ export const addTodo = (userId, todo) => {
 export const updateTodo = (userId, todo) => {
   return async (dispatch) => {
     try {
-      const res = updateTodoRequest(userId, todo);
-      dispatch(updateTodoProcess(todo));
+      const res = await updateTodoRequest(userId, todo);
+      dispatch(updateTodoProcess({ ...res, ...todo }));
     } catch (e) {
       console.log(e);
     }
@@ -81,5 +82,13 @@ export const updateTodo = (userId, todo) => {
 };
 
 export const deleteTodo = async (userId, todoId) => {
-  return async (dispatch) => {};
+  return async (dispatch) => {
+    console.log("ssss");
+    try {
+      const res = await deleteTodoRequest(userId, todoId);
+      dispatch(deleteTodoProcess(todoId));
+    } catch (e) {
+      console.log(e);
+    }
+  };
 };

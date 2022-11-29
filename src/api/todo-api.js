@@ -36,8 +36,7 @@ export async function addTodoRequest(userId, todo) {
     console.log(secondData);
     throw new Error(secondData.error.message || "Could not login!.");
   }
-
-  return secondData;
+  return { ...todo, id: data.name };
 }
 
 export async function getTodoRequest(userId) {

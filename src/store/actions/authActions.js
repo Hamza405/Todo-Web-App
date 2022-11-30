@@ -1,4 +1,3 @@
-import { authStorageKey } from "../../utils/constants";
 import {
   loginRequest,
   registerRequest,

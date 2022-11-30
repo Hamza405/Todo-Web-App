@@ -1,34 +1,57 @@
-export const addTodoAction = (state, action) => {
-  state.todoList.push(action.payload);
-};
-export const deleteTodoAction = (state, action) => {
-  if (state.todoList.length > 0) {
-    const todoListArr = [...state.todoList];
-    todoListArr.forEach((todo, index) => {
-      if (todo.id === action.payload) {
-        todoListArr.splice(index, 1);
-      }
-    });
-    state.todoList = todoListArr;
-  }
-};
-export const updateTodoAction = (state, action) => {
-  if (state.todoList.length > 0) {
-    const todoListArr = [...state.todoList];
+import {
+  addTodoRequest,
+  deleteTodoRequest,
+  getTodoRequest,
+  updateTodoRequest,
+} from "../../api/todo-api";
 
-    todoListArr.forEach((todo) => {
-      if (todo.id === action.payload.id) {
-        todo.status = action.payload.status;
-        todo.title = action.payload.title;
-      }
-    });
-    state.todoList = [...todoListArr];
-  }
-};
-export const updateFilterStatusAction = (state, action) => {
-  state.filterStatus = action.payload;
+import {
+  replaceTodoList,
+  addTodoAction,
+  updateTodoAction,
+  deleteTodoAction,
+} from "../slices/todoSlice";
+
+export const getTodo = (userId) => {
+  return async (dispatch) => {
+    try {
+      const res = await getTodoRequest(userId);
+      dispatch(replaceTodoList(res));
+    } catch (e) {
+      console.log(e);
+    }
+  };
 };
 
-export const replaceTodoListAction = (state, action) => {
-  state.todoList = action.payload;
+export const addTodo = (userId, todo) => {
+  return async (dispatch) => {
+    try {
+      const res = await addTodoRequest(userId, todo);
+      dispatch(addTodoAction(res));
+    } catch (e) {
+      console.log(e);
+    }
+  };
+};
+
+export const updateTodo = (userId, todo) => {
+  return async (dispatch) => {
+    try {
+      const res = await updateTodoRequest(userId, todo);
+      dispatch(updateTodoAction({ ...res, ...todo }));
+    } catch (e) {
+      console.log(e);
+    }
+  };
+};
+
+export const deleteTodo = (userId, todoId) => {
+  return async (dispatch) => {
+    try {
+      await deleteTodoRequest(userId, todoId);
+      dispatch(deleteTodoAction(todoId));
+    } catch (e) {
+      console.log(e);
+    }
+  };
 };

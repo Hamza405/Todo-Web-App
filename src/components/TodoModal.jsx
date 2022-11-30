@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { MdOutlineClose } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { updateTodo } from "../store/slices/todoSlice";
-import { addTodo } from "../store/slices/todoSlice";
+import { updateTodo, addTodo } from "../store/actions/todoActions";
 import { v4 as uuid } from "uuid";
 import style from "../styles/modules/modal.module.scss";
 import Button from "./Button";
@@ -61,7 +60,6 @@ const TodoModal = ({ type, todo, handleCloseModal }) => {
           time: new Date().toLocaleString(),
         })
       );
-      toast.success("Task Added Successfully");
       handleCloseModal();
     }
     if (type === "update") {

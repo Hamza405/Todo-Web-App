@@ -6,7 +6,7 @@ import Button from "../components/Button";
 import style from "../styles/modules/app.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../store/slices/authSlice";
-import { getTodo } from "../store/slices/todoSlice";
+import { getTodo } from "../store/actions/todoActions";
 
 const TodoPage = () => {
   const userId = useSelector((state) => state.auth.user.userId);

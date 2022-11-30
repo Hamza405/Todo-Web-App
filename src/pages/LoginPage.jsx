@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Toaster } from "react-hot-toast";
@@ -6,7 +6,8 @@ import { login } from "../store/actions/authActions";
 import Button from "../components/Button";
 import style from "../styles/modules/register.module.scss";
 import toast from "react-hot-toast";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setLoading } from "../store/slices/uiSlice";
 
 const LoginPage = () => {
   const dispatch = useDispatch();
@@ -15,7 +16,14 @@ const LoginPage = () => {
   const passwordRef = useRef();
   const [emailError, setEmailError] = useState(null);
   const [passwordError, setPasswordError] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const loading = useSelector((state) => state.ui.loading);
+  const isAuth = useSelector((state) => state.auth.isAuth);
+
+  useEffect(() => {
+    if (isAuth) {
+      navigate("/");
+    }
+  }, [isAuth]);
 
   const submit = async (e) => {
     e.preventDefault();
@@ -37,10 +45,7 @@ const LoginPage = () => {
     }
 
     try {
-      setLoading(true);
       dispatch(login(inputData));
-      setLoading(false);
-      navigate("/");
     } catch (e) {
       console.log(e);
       toast.error(e.message);

@@ -5,10 +5,12 @@ import {
   updateProfile,
 } from "../../api/auth-api";
 import { handleLogin } from "../slices/authSlice";
+import { setLoading } from "../slices/uiSlice";
 
 export const login = (inputData) => {
   return async (dispatch) => {
     try {
+      dispatch(setLoading(true));
       const res = await loginRequest(inputData);
       dispatch(
         handleLogin({
@@ -18,8 +20,10 @@ export const login = (inputData) => {
           userId: res.localId,
         })
       );
+      dispatch(setLoading(false));
     } catch (e) {
       console.log(e);
+      dispatch(setLoading(false));
     }
   };
 };

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Toaster } from "react-hot-toast";
@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 import { register } from "../store/actions/authActions";
 import Button from "../components/Button";
 import style from "../styles/modules/register.module.scss";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const RegisterPage = () => {
   const dispatch = useDispatch();
@@ -17,7 +17,14 @@ const RegisterPage = () => {
   const [emailError, setEmailError] = useState(null);
   const [passwordError, setPasswordError] = useState(null);
   const [usernameError, setUsernameError] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const loading = useSelector((state) => state.ui.loading);
+  const isAuth = useSelector((state) => state.auth.isAuth);
+
+  useEffect(() => {
+    if (isAuth) {
+      navigate("/");
+    }
+  }, [isAuth]);
 
   const submit = async (e) => {
     e.preventDefault();
@@ -43,14 +50,10 @@ const RegisterPage = () => {
     }
 
     try {
-      setLoading(true);
       dispatch(register(inputData));
-      setLoading(false);
-      navigate("/");
     } catch (e) {
       console.log(e);
       toast.error(e.message);
-      setLoading(false);
     }
   };
   return (

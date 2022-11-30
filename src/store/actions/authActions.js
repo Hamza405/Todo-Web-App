@@ -7,6 +7,8 @@ import { handleLogin } from "../slices/authSlice";
 import { setLoading } from "../slices/uiSlice";
 import { showNotification } from "../slices/uiSlice";
 
+import { ERROR_STATUS, SUCCESS_STATUS } from "../../utils/constants";
+
 export const login = (inputData) => {
   return async (dispatch) => {
     try {
@@ -24,14 +26,14 @@ export const login = (inputData) => {
       dispatch(
         showNotification({
           message: "Welcome again",
-          status: "success",
+          status: SUCCESS_STATUS,
         })
       );
     } catch (e) {
       dispatch(
         showNotification({
           message: e.message,
-          status: "error",
+          status: ERROR_STATUS,
         })
       );
     }
@@ -58,14 +60,14 @@ export const register = (inputData) => {
       dispatch(
         showNotification({
           message: "Welcome in todo app",
-          status: "success",
+          status: SUCCESS_STATUS,
         })
       );
     } catch (e) {
       dispatch(
         showNotification({
           message: e.message,
-          status: "error",
+          status: ERROR_STATUS,
         })
       );
     }

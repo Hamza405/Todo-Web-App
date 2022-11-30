@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-hot-toast";
+import { ERROR_STATUS, SUCCESS_STATUS } from "../../utils/constants";
 
 const uiSlice = createSlice({
   name: "ui",
@@ -16,10 +17,10 @@ const uiSlice = createSlice({
         status: action.payload.status,
         message: action.payload.message,
       };
-      if (action.payload.status === "error") {
+      if (action.payload.status === ERROR_STATUS) {
         toast.error(action.payload.message);
       }
-      if (action.payload.status === "success") {
+      if (action.payload.status === SUCCESS_STATUS) {
         toast.success(action.payload.message);
       }
     },

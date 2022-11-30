@@ -65,7 +65,6 @@ const TodoModal = ({ type, todo, handleCloseModal }) => {
     if (type === "update") {
       if (todo.title !== title || todo.status !== status) {
         dispatch(updateTodo(userId, { ...todo, title, status }));
-        toast.success("Task Updated successfully");
       } else {
         toast.error("No changes made");
         return;

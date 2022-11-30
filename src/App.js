@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import TodoPage from "./pages/TodoPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   const isAuth = useSelector((state) => state.auth.isAuth);
@@ -30,6 +31,10 @@ function App() {
           <Route path="register" element={<RegisterPage />} />
         </Route>
       </Routes>
+      <Toaster
+        toastOptions={{ className: "toaster" }}
+        position="bottom-center"
+      />
     </BrowserRouter>
   );
 }

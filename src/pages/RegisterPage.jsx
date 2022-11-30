@@ -1,8 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Toaster } from "react-hot-toast";
-import toast from "react-hot-toast";
 import { register } from "../store/actions/authActions";
 import Button from "../components/Button";
 import style from "../styles/modules/register.module.scss";
@@ -48,13 +46,7 @@ const RegisterPage = () => {
       setPasswordError({ error: "Password should be at lest 7 charter" });
       return;
     }
-
-    try {
-      dispatch(register(inputData));
-    } catch (e) {
-      console.log(e);
-      toast.error(e.message);
-    }
+    dispatch(register(inputData));
   };
   return (
     <div className={style.page__wrapper}>
@@ -108,10 +100,6 @@ const RegisterPage = () => {
           </Link>
         </form>
       </motion.div>
-      <Toaster
-        toastOptions={{ className: "toaster" }}
-        position="bottom-center"
-      />
     </div>
   );
 };

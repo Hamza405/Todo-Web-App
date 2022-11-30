@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { Toaster } from "react-hot-toast";
 import PageTitle from "../components/PageTitle";
 import AppHeader from "../components/AppHeader";
 import TodoList from "../components/TodoList";
@@ -27,10 +26,6 @@ const TodoPage = () => {
           <TodoList />
         </div>
       </div>
-      <Toaster
-        toastOptions={{ className: "toaster" }}
-        position="bottom-right"
-      />
     </>
   );
 };

@@ -6,12 +6,14 @@ import {
 } from "../../api/auth-api";
 import { handleLogin } from "../slices/authSlice";
 import { setLoading } from "../slices/uiSlice";
+import { showNotification } from "../slices/uiSlice";
 
 export const login = (inputData) => {
   return async (dispatch) => {
     try {
       dispatch(setLoading(true));
       const res = await loginRequest(inputData);
+
       dispatch(
         handleLogin({
           displayName: res.displayName,
@@ -20,11 +22,21 @@ export const login = (inputData) => {
           userId: res.localId,
         })
       );
-      dispatch(setLoading(false));
+      dispatch(
+        showNotification({
+          message: "Welcome again",
+          status: "success",
+        })
+      );
     } catch (e) {
-      console.log(e);
-      dispatch(setLoading(false));
+      dispatch(
+        showNotification({
+          message: e.message,
+          status: "error",
+        })
+      );
     }
+    dispatch(setLoading(false));
   };
 };
 
@@ -44,8 +56,20 @@ export const register = (inputData) => {
           userId: res.localId,
         })
       );
+      dispatch(
+        showNotification({
+          message: "Welcome in todo app",
+          status: "success",
+        })
+      );
     } catch (e) {
-      console.log(e);
+      dispatch(
+        showNotification({
+          message: e.message,
+          status: "error",
+        })
+      );
     }
+    dispatch(setLoading(false));
   };
 };

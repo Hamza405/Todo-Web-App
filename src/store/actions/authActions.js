@@ -9,6 +9,7 @@ import { showNotification } from "../slices/uiSlice";
 
 import { ERROR_STATUS, SUCCESS_STATUS } from "../../utils/constants";
 import { replaceTodoList } from "../slices/todoSlice";
+import { initUserTodoCollection } from "../../api/todo-api";
 
 export const login = (inputData) => {
   return async (dispatch) => {
@@ -50,6 +51,7 @@ export const register = (inputData) => {
         displayName: inputData.displayName,
         token: res.idToken,
       });
+      await initUserTodoCollection(res.localId, secondRes.displayName);
       dispatch(
         handleLogin({
           displayName: secondRes.displayName,

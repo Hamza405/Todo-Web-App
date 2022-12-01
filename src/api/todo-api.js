@@ -39,6 +39,30 @@ export async function addTodoRequest(userId, todo) {
   return { ...todo, id: data.name };
 }
 
+export async function initUserTodoCollection(userId, userName) {
+  const res = await fetch(
+    `https://tishreen-62882-default-rtdb.firebaseio.com/todos/${userId}.json`,
+    {
+      method: "POST",
+      body: JSON.stringify({
+        userName,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+
+  const data = await res.json();
+
+  if (!res.ok) {
+    console.log(data);
+    throw new Error(data.error.message || "Could not login!.");
+  }
+
+  return data;
+}
+
 export async function getTodoRequest(userId) {
   const res = await fetch(
     `https://tishreen-62882-default-rtdb.firebaseio.com/todos/${userId}.json`
@@ -51,7 +75,7 @@ export async function getTodoRequest(userId) {
     throw new Error(data.error.message || "Could not login!.");
   }
 
-  return Object.values(data);
+  return Object.values(data).slice(1);
 }
 
 export const updateTodoRequest = async (userId, todo) => {

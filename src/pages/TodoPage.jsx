@@ -14,7 +14,7 @@ const TodoPage = () => {
 
   useEffect(() => {
     dispatch(getTodo(userId));
-  }, []);
+  }, [userId, dispatch]);
 
   return (
     <>

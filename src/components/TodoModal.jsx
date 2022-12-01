@@ -99,7 +99,7 @@ const TodoModal = ({ type, todo, handleCloseModal }) => {
           </motion.div>
           <form className={style.form} onSubmit={handleSubmit}>
             <h1 className={style.formTitle}>
-              {type === "add" ? "Add" : "Update"} TODO
+              {type === "add" ? "Add" : "Update"} Todo
             </h1>
             <label htmlFor="title">
               Title

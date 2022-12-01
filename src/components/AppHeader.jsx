@@ -16,13 +16,17 @@ const AppHeader = () => {
   const handleFilter = (e) => dispatch(updateFilterStatus(e.target.value));
   return (
     <div className={style.appHeader}>
-      <Button onClick={handleOpenModal}>Add Task</Button>
+      <Button variant="primary" onClick={handleOpenModal}>
+        Add Task
+      </Button>
       <SelectButton id="status" value={filterStatus} onChange={handleFilter}>
         <option value="all">All</option>
         <option value="incomplete">In Completed</option>
         <option value="complete">Completed</option>
       </SelectButton>
-      {modalOpen && <TodoModal handleCloseModal={handleCloseModal} />}
+      {modalOpen && (
+        <TodoModal type="add" handleCloseModal={handleCloseModal} />
+      )}
     </div>
   );
 };

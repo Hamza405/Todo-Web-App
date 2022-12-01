@@ -1,11 +1,10 @@
 import React, { useEffect } from "react";
-import PageTitle from "../components/PageTitle";
+import PageHeader from "../components/PageHeader";
 import AppHeader from "../components/AppHeader";
 import TodoList from "../components/TodoList";
-import Button from "../components/Button";
 import style from "../styles/modules/app.module.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../store/actions/authActions";
+
 import { getTodo } from "../store/actions/todoActions";
 
 const TodoPage = () => {
@@ -19,10 +18,9 @@ const TodoPage = () => {
   return (
     <>
       <div className="container">
-        <PageTitle>Todo List</PageTitle>
-        <Button onClick={() => dispatch(logout())}>Logout</Button>
+        <PageHeader>Todo List</PageHeader>
         <div className={style.app__wrapper}>
-          <AppHeader></AppHeader>
+          <AppHeader />
           <TodoList />
         </div>
       </div>

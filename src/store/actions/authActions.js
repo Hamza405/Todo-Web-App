@@ -3,11 +3,12 @@ import {
   registerRequest,
   updateProfile,
 } from "../../api/auth-api";
-import { handleLogin } from "../slices/authSlice";
+import { handleLogin, handleLogout } from "../slices/authSlice";
 import { setLoading } from "../slices/uiSlice";
 import { showNotification } from "../slices/uiSlice";
 
 import { ERROR_STATUS, SUCCESS_STATUS } from "../../utils/constants";
+import { replaceTodoList } from "../slices/todoSlice";
 
 export const login = (inputData) => {
   return async (dispatch) => {
@@ -72,5 +73,12 @@ export const register = (inputData) => {
       );
     }
     dispatch(setLoading(false));
+  };
+};
+
+export const logout = () => {
+  return (dispatch) => {
+    dispatch(handleLogout());
+    dispatch(replaceTodoList([]));
   };
 };

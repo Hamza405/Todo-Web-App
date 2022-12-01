@@ -5,7 +5,7 @@ import TodoList from "../components/TodoList";
 import Button from "../components/Button";
 import style from "../styles/modules/app.module.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../store/slices/authSlice";
+import { logout } from "../store/actions/authActions";
 import { getTodo } from "../store/actions/todoActions";
 
 const TodoPage = () => {

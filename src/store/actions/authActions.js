@@ -46,6 +46,7 @@ export const login = (inputData) => {
 export const register = (inputData) => {
   return async (dispatch) => {
     try {
+      dispatch(setLoading(true));
       const res = await registerRequest(inputData);
       const secondRes = await updateProfile({
         displayName: inputData.displayName,

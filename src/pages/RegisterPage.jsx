@@ -1,10 +1,11 @@
 import React, { useRef, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { motion } from "framer-motion";
+
 import { register } from "../store/actions/authActions";
 import Button from "../components/Button";
 import style from "../styles/modules/register.module.scss";
-import { useDispatch, useSelector } from "react-redux";
 
 const RegisterPage = () => {
   const dispatch = useDispatch();

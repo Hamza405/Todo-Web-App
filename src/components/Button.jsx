@@ -1,4 +1,5 @@
 import React from "react";
+
 import style from "../styles/modules/button.module.scss";
 import { getStyleClasses } from "../utils/getStyleClasses";
 

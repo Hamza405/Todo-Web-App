@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
 import { updateFilterStatus } from "../store/slices/todoSlice";
 import style from "../styles/modules/app.module.scss";
 import Button from "./Button";

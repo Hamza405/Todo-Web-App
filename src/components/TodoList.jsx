@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { AnimatePresence, motion } from "framer-motion";
+
 import TodoItem from "./TodoItem";
 import style from "../styles/modules/app.module.scss";
 

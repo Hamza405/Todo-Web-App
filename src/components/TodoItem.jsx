@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { format } from "date-fns";
 import { motion } from "framer-motion";
+import { useDispatch } from "react-redux";
 import { MdDelete, MdEdit } from "react-icons/md";
+
 import { getStyleClasses } from "../utils/getStyleClasses";
 import style from "../styles/modules/todoItem.module.scss";
-import { useDispatch } from "react-redux";
 import { deleteTodo, updateTodo } from "../store/actions/todoActions";
 import TodoModal from "./TodoModal";
 import CheckButton from "./CheckButton";

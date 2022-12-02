@@ -1,14 +1,13 @@
+import { endpoint } from "../utils/constants";
+
 export async function addTodoRequest(userId, todo) {
-  const res = await fetch(
-    `https://tishreen-62882-default-rtdb.firebaseio.com/todos/${userId}.json`,
-    {
-      method: "POST",
-      body: JSON.stringify(todo),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  );
+  const res = await fetch(`${endpoint}${userId}.json`, {
+    method: "POST",
+    body: JSON.stringify(todo),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 
   const data = await res.json();
 
@@ -17,18 +16,15 @@ export async function addTodoRequest(userId, todo) {
     throw new Error(data.error.message || "Could not login!.");
   }
 
-  const secondRes = await fetch(
-    `https://tishreen-62882-default-rtdb.firebaseio.com/todos/${userId}/${data.name}.json`,
-    {
-      method: "PATCH",
-      body: JSON.stringify({
-        id: data.name,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  );
+  const secondRes = await fetch(`${endpoint}${userId}/${data.name}.json`, {
+    method: "PATCH",
+    body: JSON.stringify({
+      id: data.name,
+    }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 
   const secondData = await secondRes.json();
 
@@ -40,18 +36,15 @@ export async function addTodoRequest(userId, todo) {
 }
 
 export async function initUserTodoCollection(userId, userName) {
-  const res = await fetch(
-    `https://tishreen-62882-default-rtdb.firebaseio.com/todos/${userId}.json`,
-    {
-      method: "POST",
-      body: JSON.stringify({
-        userName,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  );
+  const res = await fetch(`${endpoint}${userId}.json`, {
+    method: "POST",
+    body: JSON.stringify({
+      userName,
+    }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 
   const data = await res.json();
 
@@ -64,9 +57,7 @@ export async function initUserTodoCollection(userId, userName) {
 }
 
 export async function getTodoRequest(userId) {
-  const res = await fetch(
-    `https://tishreen-62882-default-rtdb.firebaseio.com/todos/${userId}.json`
-  );
+  const res = await fetch(`${endpoint}${userId}.json`);
 
   const data = await res.json();
 
@@ -79,19 +70,16 @@ export async function getTodoRequest(userId) {
 }
 
 export const updateTodoRequest = async (userId, todo) => {
-  const res = await fetch(
-    `https://tishreen-62882-default-rtdb.firebaseio.com/todos/${userId}/${todo.id}.json`,
-    {
-      method: "PATCH",
-      body: JSON.stringify({
-        status: todo.status,
-        title: todo.title,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  );
+  const res = await fetch(`${endpoint}${userId}/${todo.id}.json`, {
+    method: "PATCH",
+    body: JSON.stringify({
+      status: todo.status,
+      title: todo.title,
+    }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 
   const data = await res.json();
 
@@ -104,15 +92,12 @@ export const updateTodoRequest = async (userId, todo) => {
 };
 
 export const deleteTodoRequest = async (userId, todoId) => {
-  const res = await fetch(
-    `https://tishreen-62882-default-rtdb.firebaseio.com/todos/${userId}/${todoId}.json`,
-    {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  );
+  const res = await fetch(`${endpoint}${userId}/${todoId}.json`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 
   const data = await res.json();
 

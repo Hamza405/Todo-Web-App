@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { MdOutlineClose } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { updateTodo, addTodo } from "../store/actions/todoActions";
-import { v4 as uuid } from "uuid";
-import style from "../styles/modules/modal.module.scss";
-import Button from "./Button";
 import toast from "react-hot-toast";
 import { AnimatePresence, motion } from "framer-motion";
+import { v4 as uuid } from "uuid";
+
+import { updateTodo, addTodo } from "../store/actions/todoActions";
+import style from "../styles/modules/modal.module.scss";
+import Button from "./Button";
 
 const dropIn = {
   hidden: {

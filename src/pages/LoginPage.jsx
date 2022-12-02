@@ -21,7 +21,7 @@ const LoginPage = () => {
     if (isAuth) {
       navigate("/");
     }
-  }, [isAuth]);
+  }, [isAuth, navigate]);
 
   const submit = async (e) => {
     e.preventDefault();

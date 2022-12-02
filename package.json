@@ -1,7 +1,7 @@
 {
   "name": "todo-app",
   "version": "0.1.0",
-  "homepage": ".",
+  "homepage": "https://hamza405.github.io",
   "private": true,
   "dependencies": {
     "@fontsource/poppins": "^4.5.10",

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import PageHeader from "../components/PageHeader";
@@ -9,7 +9,13 @@ import style from "../styles/modules/app.module.scss";
 
 const TodoPage = () => {
   const userId = useSelector((state) => state.auth.user.userId);
+  const userName = useSelector((state) => state.auth.user.displayName);
   const dispatch = useDispatch();
+
+  const TitleComponent = useMemo(
+    () => <PageHeader>Todo List</PageHeader>,
+    [userName]
+  );
 
   useEffect(() => {
     dispatch(getTodo(userId));
@@ -18,7 +24,7 @@ const TodoPage = () => {
   return (
     <>
       <div className="container">
-        <PageHeader>Todo List</PageHeader>
+        {TitleComponent}
         <div className={style.app__wrapper}>
           <AppHeader />
           <TodoList />

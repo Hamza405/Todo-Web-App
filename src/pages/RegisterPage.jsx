@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { register } from "../store/actions/authActions";
 import Button from "../components/Button";
 import style from "../styles/modules/register.module.scss";
+import { useMemo } from "react";
 
 const RegisterPage = () => {
   const dispatch = useDispatch();
@@ -18,6 +19,11 @@ const RegisterPage = () => {
   const [usernameError, setUsernameError] = useState(null);
   const loading = useSelector((state) => state.ui.loading);
   const isAuth = useSelector((state) => state.auth.isAuth);
+
+  const TitleComponent = useMemo(
+    () => <h2 className={style.formTitle}>Register</h2>,
+    []
+  );
 
   useEffect(() => {
     if (isAuth) {
@@ -57,7 +63,7 @@ const RegisterPage = () => {
         className={style.card}
       >
         <form className={style.form} onSubmit={submit}>
-          <h2 className={style.formTitle}>Register</h2>
+          {TitleComponent}
           <label htmlFor="username">
             User Name
             <input

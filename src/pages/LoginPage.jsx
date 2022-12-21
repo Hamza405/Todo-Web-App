@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { login } from "../store/actions/authActions";
 import Button from "../components/Button";
 import style from "../styles/modules/register.module.scss";
+import { useMemo } from "react";
 
 const LoginPage = () => {
   const dispatch = useDispatch();
@@ -16,6 +17,11 @@ const LoginPage = () => {
   const [passwordError, setPasswordError] = useState(null);
   const loading = useSelector((state) => state.ui.loading);
   const isAuth = useSelector((state) => state.auth.isAuth);
+
+  const TitleComponent = useMemo(
+    () => <h2 className={style.formTitle}>Login</h2>,
+    []
+  );
 
   useEffect(() => {
     if (isAuth) {
@@ -51,7 +57,7 @@ const LoginPage = () => {
         className={style.card}
       >
         <form className={style.form} onSubmit={submit}>
-          <h2 className={style.formTitle}>Login</h2>
+          {TitleComponent}
           <label htmlFor="email">
             Email
             <input
